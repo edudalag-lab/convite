@@ -349,6 +349,24 @@
     </section>
 
     <script>
+            const loading =
+        document.getElementById("loading");
+
+    window.addEventListener("load", function () {
+
+        setTimeout(function () {
+
+            loading.classList.add("ocultar");
+
+            setTimeout(function () {
+
+                loading.style.display = "none";
+
+            }, 800);
+
+        }, 700);
+
+    });
         const grupoEtiqueta =
             document.getElementById("grupoEtiqueta");
 
