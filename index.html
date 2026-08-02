@@ -25,15 +25,110 @@
             overflow: hidden;
             background: #120b07;
         }
+    
+        
+.tela {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        .tela {
-            position: fixed;
-            inset: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+/* ==========================
+   TELA DE ABERTURA
+========================== */
 
+#loading {
+
+    position: fixed;
+    inset: 0;
+
+    background: #120b07;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+
+    transition: opacity .8s ease;
+}
+
+#loading.ocultar{
+
+    opacity:0;
+    pointer-events:none;
+}
+
+#tituloLoading{
+
+    font-family: Georgia, serif;
+
+    font-size: clamp(30px,3vw,48px);
+
+    letter-spacing:6px;
+
+    color:#d9c6a2;
+
+    margin-bottom:18px;
+}
+
+#subtituloLoading{
+
+    font-family: Georgia, serif;
+
+    font-size:14px;
+
+    color:#9f8b6f;
+
+    letter-spacing:2px;
+
+    margin-bottom:28px;
+}
+
+#barra{
+
+    width:220px;
+
+    height:2px;
+
+    background:#3b2d20;
+
+    overflow:hidden;
+}
+
+#barra::after{
+
+    content:"";
+
+    display:block;
+
+    width:0;
+
+    height:100%;
+
+    background:#c7a35b;
+
+    animation:carregar .65s linear forwards;
+}
+
+@keyframes carregar{
+
+    from{
+
+        width:0;
+    }
+
+    to{
+
+        width:100%;
+    }
+
+}
         /* TELA DA ETIQUETA */
 
         #telaEtiqueta {
