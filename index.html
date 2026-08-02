@@ -367,11 +367,37 @@ setTimeout(function () {
         const telaConvite =
             document.getElementById("telaConvite");
 
-        const parametros =
-            new URLSearchParams(window.location.search);
+        const convidados = {
+    "tia-celia": "Tia Celia e Família",
+    "marcelo": "Marcelo e Claudia",
+    "marcio-familia": "Marcio e Família",
+    "cintia": "Cintia e Família",
+    "luciane": "Luciane",
+    "mae-noiva": "Mãe da Noiva",
+    "joao-pedro": "João Pedro",
+    "isis": "Isís Bandeira",
+    "marcio-bandeira": "Marcio Bandeira",
+    "geiza": "Geiza Bandeira",
+    "lorenzo": "Lorenzo Bandeira",
+    "tio-oliveira": "Tio Oliveira",
+    "tia-branca": "Tia Branca",
+    "rodrigo": "Primo Rodrigo",
+    "meri": "Meri Barrim",
+    "ilma": "Ilma Barrim",
+    "martinha": "Martinha",
+    "mirian": "Mirian Bortolam",
+    "garca": "Garça e Gi",
+    "wagner": "Wagner da Cura",
+    "debora": "Debora Dalagnola",
+    "mae-noivo": "Mãe do Noivo",
+    "atlas": "Atlas",
+    "roque": "Roque",
+    "josue": "Josué e Família"
+};
 
-        const nome =
-            parametros.get("nome") || "Convidado Especial";
+const chave = window.location.pathname.replace(/^\/|\/$/g, "");
+
+const nome = convidados[chave] || "Convidado Especial";
 
         if (nome.length > 22) {
 
