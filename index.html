@@ -58,6 +58,7 @@ TELA DE ABERTURA
     pointer-events:none;
 }
 #tituloLoading{
+
     font-family: Georgia, serif;
 
     font-size: clamp(30px,3vw,48px);
@@ -67,6 +68,13 @@ TELA DE ABERTURA
     color:#d9c6a2;
 
     margin-bottom:18px;
+
+    width:100%;
+
+    text-align:center;
+
+    line-height:1.05;
+
 }
 #subtituloLoading{
     font-family: Georgia, serif;
@@ -241,9 +249,11 @@ TELA DE ABERTURA
         /* AJUSTE PARA CELULAR */
 
         @media (max-width: 600px) {
-            #grupoEtiqueta {
-                width: 98vw;
-                max-height: 90vh;
+            #tituloLoading{
+
+        letter-spacing:3px;
+
+        font-size:34px;
             }
 
             #grupoEtiqueta.soltar {
@@ -289,8 +299,8 @@ TELA DE ABERTURA
 <body>
  <div id="loading">
         <div id="tituloLoading">
-            ARQUIVOS DO TEMPO
-        </div>
+    ARQUIVOS DO<br>TEMPO
+</div>
 
         <div id="subtituloLoading">
             Preparando seu registro...
