@@ -353,7 +353,7 @@
         document.getElementById("loading");
 
     window.addEventListener("load", function () {
-
+maquina.play().catch(() => {});
         setTimeout(function () {
 
             loading.classList.add("ocultar");
@@ -361,7 +361,8 @@
             setTimeout(function () {
 
                 loading.style.display = "none";
-
+maquina.pause();
+maquina.currentTime = 0;
             }, 800);
 
         }, 1600);
@@ -397,7 +398,10 @@
 
         const rangido =
             new Audio("click.mp3.mp3");
+const maquina =
+    new Audio("máquina.mp3.mp3");
 
+maquina.volume = 0.25;
         rangido.volume = 0.55;
 
         let abriu = false;
