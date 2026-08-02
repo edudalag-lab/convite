@@ -395,7 +395,9 @@ setTimeout(function () {
     "josue": "Josué e Família"
 };
 
-const chave = window.location.pathname.replace(/^\/|\/$/g, "");
+const parametros = new URLSearchParams(window.location.search);
+
+const chave = parametros.get("c");
 
 const nome = convidados[chave] || "Convidado Especial";
 
