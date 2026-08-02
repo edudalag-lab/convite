@@ -30,31 +30,25 @@
             align-items: center;
         }
 
-        /* TELA DA NOVA ETIQUETA */
+        /* TELA DA ETIQUETA */
 
         #telaEtiqueta {
             opacity: 1;
             transition: opacity 0.7s ease;
         }
 
-        #etiqueta {
+        #grupoEtiqueta {
+            position: relative;
             width: min(96vw, 900px);
             max-height: 94vh;
-            object-fit: contain;
-
             cursor: pointer;
             user-select: none;
-            -webkit-user-drag: none;
             -webkit-tap-highlight-color: transparent;
 
             filter: drop-shadow(
                 0 22px 44px rgba(0, 0, 0, 0.62)
             );
 
-            /*
-            O movimento parte da região do furo
-            existente no lado esquerdo da etiqueta.
-            */
             transform-origin: 19% 52%;
 
             transition:
@@ -63,7 +57,7 @@
                 filter 0.3s ease;
         }
 
-        #etiqueta:hover {
+        #grupoEtiqueta:hover {
             transform: scale(1.012);
 
             filter: drop-shadow(
@@ -71,17 +65,58 @@
             );
         }
 
-        /*
-        Simula o barbante soltando:
-        a etiqueta gira pelo furo e cai.
-        */
-        #etiqueta.soltar {
+        #grupoEtiqueta.soltar {
             transform:
                 translate(5vw, 31vh)
                 rotate(13deg)
                 scale(0.88);
 
             opacity: 0;
+        }
+
+        #etiqueta {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 94vh;
+            object-fit: contain;
+            -webkit-user-drag: none;
+        }
+
+        /* NOME PERSONALIZADO */
+
+        #nomeConvidado {
+            position: absolute;
+
+            left: 31%;
+            right: 15%;
+            top: 55%;
+
+            transform: translateY(-50%);
+
+            text-align: center;
+            white-space: nowrap;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(24px, 4.2vw, 60px);
+            font-weight: 500;
+            letter-spacing: 1px;
+
+            color: #3b210f;
+
+            text-shadow:
+                0 1px 0 rgba(255, 228, 170, 0.55),
+                0 2px 3px rgba(70, 35, 10, 0.35);
+
+            pointer-events: none;
+        }
+
+        #nomeConvidado.nomeLongo {
+            font-size: clamp(20px, 3.3vw, 48px);
+        }
+
+        #nomeConvidado.nomeMuitoLongo {
+            font-size: clamp(17px, 2.7vw, 39px);
         }
 
         /* TELA DO CONVITE */
@@ -123,12 +158,12 @@
         /* AJUSTE PARA CELULAR */
 
         @media (max-width: 600px) {
-            #etiqueta {
+            #grupoEtiqueta {
                 width: 98vw;
                 max-height: 90vh;
             }
 
-            #etiqueta.soltar {
+            #grupoEtiqueta.soltar {
                 transform:
                     translate(4vw, 27vh)
                     rotate(11deg)
@@ -136,10 +171,20 @@
 
                 opacity: 0;
             }
+
+            #etiqueta {
+                max-height: 90vh;
+            }
+
+            #nomeConvidado {
+                left: 30%;
+                right: 14%;
+                top: 55%;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            #etiqueta,
+            #grupoEtiqueta,
             #telaEtiqueta,
             #telaConvite,
             #convite {
@@ -155,10 +200,18 @@
         id="telaEtiqueta"
         class="tela">
 
-        <img
-            id="etiqueta"
-            src="etiqueta_limpa.png.png"
-            alt="Etiqueta destinada ao convidado">
+        <div id="grupoEtiqueta">
+
+            <img
+                id="etiqueta"
+                src="etiqueta_limpa.png.png"
+                alt="Etiqueta destinada ao convidado">
+
+            <div id="nomeConvidado">
+                Convidado Especial
+            </div>
+
+        </div>
 
     </section>
 
@@ -168,20 +221,39 @@
 
         <img
             id="convite"
-           src="oficial.png"
+            src="oficial.png"
             alt="Convite de Eduardo e Leila">
 
     </section>
 
     <script>
-        const etiqueta =
-            document.getElementById("etiqueta");
+        const grupoEtiqueta =
+            document.getElementById("grupoEtiqueta");
+
+        const nomeConvidado =
+            document.getElementById("nomeConvidado");
 
         const telaEtiqueta =
             document.getElementById("telaEtiqueta");
 
         const telaConvite =
             document.getElementById("telaConvite");
+
+        const parametros =
+            new URLSearchParams(window.location.search);
+
+        const nome =
+            parametros.get("nome") || "Convidado Especial";
+
+        nomeConvidado.textContent = nome;
+
+        if (nome.length > 22) {
+            nomeConvidado.classList.add("nomeLongo");
+        }
+
+        if (nome.length > 34) {
+            nomeConvidado.classList.add("nomeMuitoLongo");
+        }
 
         const rangido =
             new Audio("click.mp3.mp3");
@@ -190,7 +262,7 @@
 
         let abriu = false;
 
-        etiqueta.addEventListener("click", function () {
+        grupoEtiqueta.addEventListener("click", function () {
             if (abriu) return;
 
             abriu = true;
@@ -198,7 +270,7 @@
             rangido.currentTime = 0;
             rangido.play().catch(() => {});
 
-            etiqueta.classList.add("soltar");
+            grupoEtiqueta.classList.add("soltar");
 
             setTimeout(function () {
                 telaEtiqueta.style.opacity = "0";
